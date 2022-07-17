@@ -1,0 +1,35 @@
+
+
+.nav {
+    height: 48px;
+    width: 100%;
+    line-height: 48px;
+    background-color: #448AFF;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    width: 120px;
+}
+
+.nav .nav-name {
+    margin-right: auto;
+    color: #fff;
+    padding-left: 8px;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+}
+
+
+.nav a:hover {
+    background-color: #3F51B5;
+}

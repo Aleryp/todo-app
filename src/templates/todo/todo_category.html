@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block category %}
+
+<div class="categories">
+
+    <div class="title">
+        <i id="hide-categories-btn" class="small material-icons">menu</i>
+    </div>
+
+    <div class="category-scroll-area">
+
+        <a href="{% url 'category' 'all'%}" class="category-item main">
+            <i class="small material-icons">bookmark_border</i><span>All tasks</span>
+        </a>
+        <a href="{% url 'category' 'important' %}" class="category-item main">
+            <i class="small material-icons">star_border</i><span>Important</span>
+        </a>
+        <a href="{% url 'category' 'my_day' %}" class="category-item main">
+            <i class="small material-icons">label_outline</i><span>My day</span>
+        </a>
+
+        <div style="height: 20px"></div>
+        {% for category in categories %}
+            <a href="{% url 'category' category.slug %}" class="category-item custom-category">
+                <i class="small material-icons">drag_handle</i><span>{{ category.name }}</span>
+            </a>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="category-item add-category-form">
+        <i class="small material-icons">add</i>
+         <form  method="POST" action="{% url 'add_new_category' current_category_slug %}" novalidate>
+            {% csrf_token %}
+             <span class="flex-span">
+             <input type="text" name="new_category" placeholder="Add category" class="todo-input">
+             <button type="submit" value="category" class="todo-input-button">
+                 <i class="small material-icons">playlist_add</i>
+             </button>
+             </span>
+        </form>
+    </div>
+
+</div>
+
+<div class="edit-category-box" id="edit-category-pop-up">
+    <a href="" class="category-item" id="delete-category-btn">
+        <i class="small material-icons">delete_forever</i><span>Delete category</span>
+    </a>
+</div>
+
+{% endblock %}

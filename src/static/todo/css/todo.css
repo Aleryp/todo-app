@@ -1,0 +1,41 @@
+
+#content {
+    flex-direction: row;
+}
+.todo-input {
+    font-size: 14px;
+    border: none;
+    background-color: #f5f5f5;
+}
+.todo-input:hover, .todo-input:focus {
+    background-color: #fff;
+}
+.todo-input::placeholder {
+  color: #1976D2;
+}
+.todo-input:hover::placeholder,
+.todo-input:focus::placeholder {
+    color: #757575;
+}
+.todo-input:focus {
+    background-color: #fff;
+    outline: none;
+}
+
+.todo-input-button {
+    border: none;
+    color: #1976D2;
+    background-color: #f5f5f5;
+}
+.todo-input-button:hover {
+    background-color: #fff;
+    outline: none;
+}
+.todo-input-button i {
+    padding: 0;
+}
+
+.flex-span {
+    display: flex;
+    align-items: center;
+}

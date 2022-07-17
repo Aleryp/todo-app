@@ -1,0 +1,56 @@
+{% load static %}
+{% load tags %}
+{% block task %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <div class="tasks">
+        <div class="title">
+            <!-- Category name + today date-->
+        </div>
+        <!-- Add a new task form -->
+        <div class="new-task">
+            <form  method="POST" action="{% url 'add_new_task' current_category_slug %}" novalidate>
+                {% csrf_token %}
+                <span class="flex-span">
+                    <i class="small material-icons" id="add-task-icon">control_point</i>
+                    <input type="text" name="new_task_text" class="add-task-input  todo-input"
+                           placeholder="Add a new task">
+                    <input type="datetime-local" id="datepicker" name="new_task_date" class="todo-input"
+                           placeholder="Add a date">
+                    <input type="text" name="new_task_desc" class="add-task-input  todo-input"
+                                    placeholder="Add a description">
+                    <input class="add-task-btn todo-input-button" type="submit" value="Add task">
+                </span>
+            </form>
+        </div>
+        <!-- All tasks -->
+        <div class="tasks-scroll-area">
+        {% for t in tasks %}
+            <div class="task-item" id="{{ t.id }}">
+                <a href="{% url 'finish_task' current_category_slug t.id %}">
+                    <i class="small material-icons">radio_button_unchecked</i></a>
+                    Name: {{ t.task }}
+                    <br>Deadline: {{ t.due_date }}
+                    <br>Created: {{ t.date_created }}
+                    <br>Description: {{ t.description }}
+
+                <a href="{% url 'set_task_important' current_category_slug t.id %}" class="important-btn">
+                    <i class="small material-icons ">star_border</i></a>
+            </div>
+            <div class="edit-task-box" id="edit-task-pop-up">
+             <a href="{% url 'remove_from_completed' current_category_slug t.id %}" class="category-item" id="remove-from-completed-btn">
+                 <i class="small material-icons">refresh</i><span>Remove from completed</span>
+             </a>
+             <a href="{% url 'delete_task' current_category_slug t.id %}" class="category-item" id="delete-task-btn">
+                 <i class="small material-icons">delete_forever</i><span>Delete task</span>
+             </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <script type="text/javascript">
+        let tasks = {{ tasks|json|safe }};
+    </script>
+
+{% endblock %}
